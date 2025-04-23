@@ -1,4 +1,4 @@
-import java.util.Scanner;
+
 
 /**
  * Write a description of class Horse here.
@@ -65,6 +65,7 @@ public class Horse
     public void goBackToStart()
     {
         this.horseDistance = 0;
+        this.horseFallen = false;
         return;
     }
     
@@ -81,14 +82,11 @@ public class Horse
 
     public void setConfidence(double newConfidence)
     {
-        Scanner scanner = new Scanner(System.in);
-
-        while(newConfidence > 1.0 || newConfidence < 0.0){
-            System.out.println("You need to pick a value between 1 and 0");
-            newConfidence = Double.parseDouble(scanner.nextLine());
+        if (newConfidence >= 0.0 && newConfidence <= 1.0) {
+            this.horseConfidence = newConfidence;
+        } else {
+            System.out.println("Invalid confidence. Must be between 0 and 1.");
         }
-        
-        this.horseConfidence = newConfidence;
     }
     
     public void setSymbol(char newSymbol)
