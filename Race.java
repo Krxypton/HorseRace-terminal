@@ -73,7 +73,7 @@ public class Race
         lane2Horse.goBackToStart();
         lane3Horse.goBackToStart();
                       
-        while (!finished)
+        while (!finished && !allHorsesFallen())
         {
             //move each horse
             moveHorse(lane1Horse);
@@ -82,7 +82,7 @@ public class Race
                         
             //print the race positions
             printRace();
-            
+
             //if any of the three horses has won the race is finished
             Horse[] lanes = { lane1Horse, lane2Horse, lane3Horse };
 
@@ -95,9 +95,12 @@ public class Race
             }
 
             //wait for 100 milliseconds
-            try{ 
-                TimeUnit.MILLISECONDS.sleep(100);
-            }catch(Exception e){}
+             try {
+                TimeUnit.MILLISECONDS.sleep(100); 
+            } catch (InterruptedException e) {
+                System.out.println("Error the race delay has been interrupted!");
+                   
+}
             
         }
         System.out.println("\nRace Finished! The winner is " + winner.getName() + 
@@ -141,15 +144,9 @@ public class Race
      */
     private boolean raceWonBy(Horse theHorse)
     {
-        if (theHorse.getDistanceTravelled() >= raceLength)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return theHorse.getDistanceTravelled() >= raceLength;
     }
+        
     
     /***
      * Print the race on the terminal
@@ -229,15 +226,20 @@ public class Race
             i = i + 1;
         }
     }
+    private boolean allHorsesFallen() {
+        return lane1Horse.hasFallen() && 
+               lane2Horse.hasFallen() && 
+               lane3Horse.hasFallen();
+    }
 }
 
 class Main {
     public static void main(String[] args) {
         Race race = new Race(20); // for example, 20 units long
 
-        Horse horse1 = new Horse('\u265E', "Harry", 0.8);
-        Horse horse2 = new Horse('\u2658', "Tiffany", 0.7);
-        Horse horse3 = new Horse('\u2655', "Trex", 0.9);
+        Horse horse1 = new Horse('A', "Harry", 0.8);
+        Horse horse2 = new Horse('B', "Tiffany", 0.7);
+        Horse horse3 = new Horse('C', "Trex", 0.9);
 
         race.addHorse(horse1, 1);
         race.addHorse(horse2, 2);
