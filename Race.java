@@ -103,8 +103,15 @@ public class Race
 }
             
         }
-        System.out.println("\nRace Finished! The winner is " + winner.getName() + 
-                  " with confidence " + winner.getConfidence());
+        if (winner != null) {
+            System.out.println("\nAnd the winner is... " + winner.getName() + "!");
+        } 
+        else if (allHorsesFallen()) {
+            System.out.println("\n🏁 All horses fell! It's a tie with no winner.");
+        } 
+        else {
+            System.out.println("\n🏁 Race aborted (unexpected error).");
+        }
     }
     
     /**
