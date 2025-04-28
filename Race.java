@@ -104,13 +104,14 @@ public class Race
             
         }
         if (winner != null) {
+            winner.setConfidence(Math.min(1.0, winner.getConfidence() + 0.1));
             System.out.println("\nAnd the winner is... " + winner.getName() + "!");
         } 
         else if (allHorsesFallen()) {
-            System.out.println("\n🏁 All horses fell! It's a tie with no winner.");
+            System.out.println("\n All horses fell! It's a tie with no winner.");
         } 
         else {
-            System.out.println("\n🏁 Race aborted (unexpected error).");
+            System.out.println("\n Race aborted (unexpected error).");
         }
     }
     
@@ -136,7 +137,7 @@ public class Race
             //the probability that the horse will fall is very small (max is 0.1)
             //but will also will depends exponentially on confidence 
             //so if you double the confidence, the probability that it will fall is *2
-            if (Math.random() < (0.1*theHorse.getConfidence()*theHorse.getConfidence()))
+            if (Math.random() < (0.05*theHorse.getConfidence()*theHorse.getConfidence()))
             {
                 theHorse.fall();
             }
@@ -201,7 +202,7 @@ public class Race
         //else print the horse's symbol
         if(theHorse.hasFallen())
         {
-            System.out.print('\u2322');
+            System.out.print('X');
         }
         else
         {

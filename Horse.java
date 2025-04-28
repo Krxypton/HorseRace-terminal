@@ -1,97 +1,110 @@
+import java.awt.Color; 
 
-
-/**
- * Write a description of class Horse here.
- * 
- * @author Zubair Osman
- * @version 15/04/2025 V2
- */
-public class Horse
-{
-    //Fields of class Horse
+public class Horse {
     private String horseName;
     private char horseSymbol;
-    private int horseDistance = 0;
+    private double horseDistance = 0.0;
     private boolean horseFallen;
     private double horseConfidence;
-    
-      
-    //Constructor of class Horse
-    /**
-     * Constructor for objects of class Horse
-     */
-    public Horse(char horseSymbol, String horseName, double horseConfidence)
-    {
-    this.horseSymbol = horseSymbol;
-    this.horseName = horseName;
-    
-    if (horseConfidence >= 0 && horseConfidence <= 1) {
-        this.horseConfidence = horseConfidence;
-    } else {
-        System.out.println("Invalid initial confidence. Setting default to 0.5.");
-        this.horseConfidence = 0.5;
+    private HorseCustomisation customisation; 
+
+    public Horse(char horseSymbol, String horseName, double horseConfidence) {
+        this(horseSymbol, horseName, horseConfidence, createDefaultCustomisation());
     }
 
+    public Horse(char horseSymbol, String horseName, double horseConfidence, HorseCustomisation customisation) {
+        this.horseSymbol = horseSymbol;
+        this.horseName = horseName;
+        this.customisation = customisation;
+        double modifiedConfidence = horseConfidence * customisation.getConfidenceModifier();
+        this.horseConfidence = Math.max(0.1, Math.min(1.0, modifiedConfidence));
+    }
+
+    private static HorseCustomisation createDefaultCustomisation() {
+        HorseCustomisation custom = new HorseCustomisation();
+        custom.setBreed("Quarter Horse");
+        custom.setColour("Brown");  // Changed to match setColour
+        custom.setSymbol("🐎");
+        custom.setSaddle("Standard Saddle");
+        custom.setHorseshoes("Regular Horseshoes");
+        return custom;
+    }
+
+    public void fall() {
+        this.horseFallen = true;
+        this.horseConfidence = Math.max(0.1, this.horseConfidence - 0.05); // Decrease confidence
     }
     
-    
-    
-    //Other methods of class Horse
-    public void fall()
-    {
-         this.horseFallen = true;
-    }
-    
-    public double getConfidence()
-    {
+    public double getConfidence() {
         return this.horseConfidence;
     }
     
-    public int getDistanceTravelled()
-    {
-        return this.horseDistance;
+    public int getDistanceTravelled() {
+        return (int) this.horseDistance;
+    }
+
+    public double getPreciseDistance() {
+        return horseDistance; 
     }
     
-    public String getName()
-    {
+    public String getName() {
         return this.horseName;
     }
     
-    public char getSymbol()
-    {
+    public char getSymbol() {
         return this.horseSymbol;
     }
     
-    public void goBackToStart()
-    {
+    public void goBackToStart() {
         this.horseDistance = 0;
         this.horseFallen = false;
-        return;
     }
     
-    public boolean hasFallen()
-    {
+    public boolean hasFallen() {
         return this.horseFallen;
     }
 
-    public void moveForward()
-    {
-        this.horseDistance += 1;
-        return;
+    public void moveForward(double distance) {
+        this.horseDistance += distance;
     }
 
-    public void setConfidence(double newConfidence)
-    {
+    public void moveForward() {
+        this.horseDistance += 1;
+    }
+
+    public void setConfidence(double newConfidence) {
         if (newConfidence >= 0.0 && newConfidence <= 1.0) {
             this.horseConfidence = newConfidence;
-        } else {
-            System.out.println("Invalid confidence. Must be between 0 and 1.");
         }
     }
     
-    public void setSymbol(char newSymbol)
-    {
+    public void setSymbol(char newSymbol) {
         this.horseSymbol = newSymbol; 
     }
+    public HorseCustomisation getCustomisation() {  // Consistent spelling
+        return this.customisation;
+    }
+
+    public String getDisplaySymbol() {
+        return this.customisation.getSymbol() != null ? 
+               this.customisation.getSymbol() : 
+               String.valueOf(this.horseSymbol);
+    }
     
+    public Color getDisplayColour() {  // Changed to match British spelling
+        String colour = this.customisation.getColour();
+        if (colour == null) return Color.BLACK;
+        
+        switch (colour.toLowerCase()) {
+            case "black": return Color.BLACK;
+            case "white": return Color.WHITE;
+            case "grey": return Color.GRAY;
+            case "chestnut": return new Color(152, 118, 84);
+            default: return new Color(139, 69, 19);
+        }
+    }
 }
+
+
+
+   
