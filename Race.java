@@ -243,7 +243,7 @@ public class Race
 
 class Main {
     public static void main(String[] args) {
-        Race race = new Race(20); // for example, 20 units long
+        Race race = new Race(20); // 20 units long
 
         Horse horse1 = new Horse('A', "Harry", 0.8);
         Horse horse2 = new Horse('B', "Tiffany", 0.7);

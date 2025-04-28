@@ -1,4 +1,12 @@
 import java.awt.Color; 
+/**
+ * HorseRaceSimulator
+ * Author: Zubair Abdirahim Osman/240264295
+ * Version 1
+ * 15/04/2025
+ * This is a horse program where horses compete and race with each other
+ * It demonstrates OOP principles including encapsulation and polymorphism.
+ */
 
 public class Horse {
     private String horseName;
@@ -23,7 +31,7 @@ public class Horse {
     private static HorseCustomisation createDefaultCustomisation() {
         HorseCustomisation custom = new HorseCustomisation();
         custom.setBreed("Quarter Horse");
-        custom.setColour("Brown");  // Changed to match setColour
+        custom.setColour("Brown");  
         custom.setSymbol("🐎");
         custom.setSaddle("Standard Saddle");
         custom.setHorseshoes("Regular Horseshoes");
@@ -81,7 +89,7 @@ public class Horse {
     public void setSymbol(char newSymbol) {
         this.horseSymbol = newSymbol; 
     }
-    public HorseCustomisation getCustomisation() {  // Consistent spelling
+    public HorseCustomisation getCustomisation() {  
         return this.customisation;
     }
 
@@ -91,7 +99,7 @@ public class Horse {
                String.valueOf(this.horseSymbol);
     }
     
-    public Color getDisplayColour() {  // Changed to match British spelling
+    public Color getDisplayColour() {  
         String colour = this.customisation.getColour();
         if (colour == null) return Color.BLACK;
         
