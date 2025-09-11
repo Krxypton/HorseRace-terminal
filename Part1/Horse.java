@@ -17,11 +17,11 @@
     public Horse(char horseSymbol, String horseName, double horseConfidence) {
         this.horseSymbol = horseSymbol;
         this.horseName = horseName;
-        this.horseConfidence = Math.max(0.1, Math.min(1.0, horseConfidence)); // Keep confidence in [0.1, 1.0]
+        this.horseConfidence = Math.max(0.1, Math.min(1.0, horseConfidence)); // Keep confidence in (0.1, 1.0)
         this.horseFallen = false;
     }
 
-    public String getName() {
+    public String getName() {  
         return horseName;
     }
 
@@ -45,6 +45,7 @@
         horseFallen = true;
     }
 
+    // Responsible for horse falling but also moving 
     public void moveForward() {
         if (!horseFallen) {
             // 5% chance of falling
@@ -57,6 +58,7 @@
         }
     }
 
+    // Resets everything
     public void reset() {
         horseDistance = 0.0;
         horseFallen = false;
