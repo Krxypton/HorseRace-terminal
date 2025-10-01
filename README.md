@@ -22,6 +22,6 @@ Any IDE
 ## How to run Part 1:
 1. Open terminal in project directory
 2. Make sure if you have to do it your on the HorseRaceSimulator directory
-3. Compile: `javac Part1\*.java Part2\*.java`
-4. Run: `java -cp Part1;Part2 Main`
+3. Compile: `javac Horse.java Race.java`
+4. Run: `java Race`
 
