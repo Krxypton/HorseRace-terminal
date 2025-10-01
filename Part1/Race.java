@@ -83,7 +83,7 @@ public class Race {
 
     // Main method to run a demo race
     public static void main(String[] args) {
-        Race race = new Race(20); // track length
+        Race race = new Race(10); // track length
 
         Horse h1 = new Horse('A', "Derek", 0.8);
         Horse h2 = new Horse('B', "Arthur", 0.9);
